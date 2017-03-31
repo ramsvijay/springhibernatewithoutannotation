@@ -1,0 +1,32 @@
+package com.controller;
+
+import javax.servlet.ServletException;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.SimpleFormController;
+
+import com.bean.registration;
+import com.service.ServiceInf;
+
+public class DeleteController extends SimpleFormController {
+
+	ServiceInf service;
+
+	public ServiceInf getService() {
+		return service;
+	}
+
+	public void setService(ServiceInf service) {
+		this.service = service;
+	}
+
+	protected ModelAndView onSubmit(Object command) throws ServletException
+	{
+       registration reg=(registration) command;
+       System.out.println("email"+reg.getEmail());
+		String result=service.delete(reg);	
+		ModelAndView model = new ModelAndView("success");
+			return model.addObject("msg", "done");
+	}
+	
+}
